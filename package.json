@@ -1,0 +1,9 @@
+{
+    "private": true,
+    "dependencies": {
+        "tomek.js": "github:wlatanowicz/tomek.js#master",
+        "gulp-sass": "^3.1.0",
+        "autoprefixer": "^7.1.4",
+        "gulp-postcss": "^7.0.0"
+    }
+}

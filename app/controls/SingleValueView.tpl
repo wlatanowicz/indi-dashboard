@@ -1,0 +1,3 @@
+<div>
+    [%= SourceTemplateControl.DisplayValue %]
+</div>

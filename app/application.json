@@ -1,0 +1,12 @@
+{
+	"mains": {
+		"main.ts": "main.js"
+	},
+	"templates": [
+		"**/*.tpl"
+	],
+	"resources": [
+		"**/*.html",
+		"**/*.css"
+  	]
+}

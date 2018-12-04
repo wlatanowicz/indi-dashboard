@@ -75,9 +75,12 @@ class AbstractControl extends TemplateControl {
         this.attachToConnection();
     }
 
+    getConnection(): WebSocketClient {
+        return ServiceContainer.get(this.Connection);
+    }
+
     attachToConnection() {
-        let connection: WebSocketClient = ServiceContainer.get(this.Connection);
-        connection.event.attach('Receive', this.onMessageReceived.bind(this));
+        this.getConnection().event.attach('Receive', this.onMessageReceived.bind(this));
     }
 
     onMessageReceived(sender, param) {
@@ -98,6 +101,7 @@ class AbstractControl extends TemplateControl {
         let newStatus = msg.state;
         if (!this.Enabled) {
             this.Enabled = true;
+            this.render();
         }
         if (this.Status != newStatus) {
             this.Status = newStatus;

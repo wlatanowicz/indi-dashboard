@@ -16,9 +16,9 @@ gulp.task('sass', function () {
 	return gulp.src('./app/style/*.scss')
 	  .pipe(sass())
 	  .on('error', function (error) {
-		gutil.log(gutil.colors.red(
-		  'Error (' + error.plugin + '): ' + error.messageFormatted)
-		);
+			console.error(
+			'Error (' + error.plugin + '): ' + error.messageFormatted
+			);
 	  })
 	  .pipe(
 		postcss([

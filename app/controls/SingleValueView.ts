@@ -7,15 +7,17 @@ export default class SingleValueView extends ElementAbstractControl {
     template = template;
     _DisplayValue = null;
 
-    set DisplayValue(value: any)
-    {
+    set DisplayValue(value: any) {
         this._DisplayValue = value;
     }
 
-    get DisplayValue(): any
-    {
-        return this.converters.string(this._DisplayValue);
-    }    
+    get DisplayValue(): any {
+        return this.formatDisplayValue(this.converters.string(this._DisplayValue));
+    }
+
+    formatDisplayValue(value: string) {
+        return value;
+    }
 
     onSetReceived(message:SetMessage) {
         this.DisplayValue = message.getElement(this.Element).value;

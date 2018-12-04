@@ -1,8 +1,11 @@
-import { SetTextVector } from "@app/indi/messages/Set";
+import { SetTextVector, SetNumberVector, SetLightVector, SetSwitchVector } from "@app/indi/messages/Set";
 
 export default class MessageFactory {
     supportedMessages = [
         SetTextVector,
+        SetNumberVector,
+        SetLightVector,
+        SetSwitchVector,
     ]
 
     messageClassByTagName(tagName: string) {

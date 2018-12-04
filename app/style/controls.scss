@@ -48,5 +48,14 @@ body {
 
     &__content {
         padding: 10px;
+        height: calc( 100% - 40px );
+
+        .value {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
     }
 }

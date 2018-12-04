@@ -17,14 +17,6 @@ class SetMessage extends ComplexIndiMessage {
             this.oneClass.arrayFromXml(xml)
         )
     }
-
-    hasElement(name: string) {
-        return this.elements.filter((el, i) => el.name == name).length > 0
-    }
-
-    getElement(name: string) {
-        return this.elements.filter((el, i) => el.name == name)[0]
-    }
 }
 
 class SetTextVector extends SetMessage {

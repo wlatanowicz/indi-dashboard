@@ -38,7 +38,11 @@ export default class WebSocketClient implements EventResponderInterface {
         let xml = parser.parseFromString(e.data, 'application/xml');
         let mf = new MessageFactory();
         let msg = mf.messageFromXml(xml);
-        this.event.trigger('Receive', {'Message': msg});
+        if (msg) {
+            this.event.trigger('Receive', {'Message': msg});
+        } else {
+            console.warn('Unprocessable message: ' + e.data);
+        }
     }
 
     messageSend(msg: IndiMessage){

@@ -1,4 +1,6 @@
 import { SetTextVector, SetNumberVector, SetLightVector, SetSwitchVector } from "@app/indi/messages/Set";
+import { DefLightVector, DefNumberVector, DefTextVector, DefSwitchVector } from "@app/indi/messages/Def";
+import { DelProperty } from "@app/indi/messages/Del";
 
 export default class MessageFactory {
     supportedMessages = [
@@ -6,6 +8,13 @@ export default class MessageFactory {
         SetNumberVector,
         SetLightVector,
         SetSwitchVector,
+
+        DefLightVector,
+        DefNumberVector,
+        DefTextVector,
+        DefSwitchVector,
+
+        //DelProperty,
     ]
 
     messageClassByTagName(tagName: string) {
@@ -18,6 +27,13 @@ export default class MessageFactory {
     }
 
     messageFromXml(xml: XMLDocument) {
-        return this.messageClassByTagName(xml.documentElement.tagName).fromXml(xml)
+        let tagName = xml.documentElement.tagName;
+        let klass = this.messageClassByTagName(tagName)
+        if (klass) {
+            return klass.fromXml(xml)
+        } else {
+            console.warn('Unknown message type: ' + tagName);
+            return null;
+        }
     }
 }

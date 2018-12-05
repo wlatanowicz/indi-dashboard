@@ -67,7 +67,7 @@ class IndiMessagePart {
         let klass = <typeof IndiMessagePart>this.constructor;
         let xml = document.createElementNS('', klass.tagName)
         xml.setAttribute('name', this.name);
-        xml.setAttribute('value', this.value);
+        xml.innerHTML = this.value;
         return xml;
     }
 }

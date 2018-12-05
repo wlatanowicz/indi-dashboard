@@ -3,6 +3,7 @@ var requireDir = require('require-dir');
 var sass = require('gulp-sass');
 var postcss = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
+var globImporter = require('node-sass-glob-importer');
 
 requireDir('./compiler/gulp_tasks');
 
@@ -14,7 +15,9 @@ gulp.task( 'watch', function () {
 
 gulp.task('sass', function () {
 	return gulp.src('./app/style/*.scss')
-	  .pipe(sass())
+	  .pipe(sass({
+			importer: globImporter()
+		}))
 	  .on('error', function (error) {
 			console.error(
 			'Error (' + error.plugin + '): ' + error.messageFormatted

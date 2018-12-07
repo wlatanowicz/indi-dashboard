@@ -1,0 +1,7 @@
+version: '3.1'
+services:
+  dashboard:
+    build:
+      context: .
+    ports:
+      - '8009:80'

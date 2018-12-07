@@ -14,7 +14,7 @@ export default class MessageFactory {
         DefTextVector,
         DefSwitchVector,
 
-        //DelProperty,
+        DelProperty,
     ]
 
     messageClassByTagName(tagName: string) {

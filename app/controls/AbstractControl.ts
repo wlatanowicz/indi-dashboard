@@ -6,6 +6,7 @@ import { IndiMessage } from "@app/indi/messages/IndiMessage";
 import Exception from "@framework/Exception";
 import baseTemplate from "./AbstractControl.tpl"
 import { DelProperty } from "@app/indi/messages/Del";
+import { DefMessage } from "@app/indi/messages/Def";
 
 class AbstractControl extends TemplateControl {
     private baseTemplate = baseTemplate;
@@ -16,9 +17,14 @@ class AbstractControl extends TemplateControl {
     private _Rows = 1;
     private _Columns = 1;
 
-    public Enabled: boolean;
     public Status: string;
     public Label: string;
+
+    defMessage: DefMessage = null;
+
+    get Enabled(): boolean {
+        return this.defMessage !== null;
+    }
 
     set Connection(value: any)
     {
@@ -86,6 +92,10 @@ class AbstractControl extends TemplateControl {
     onMessageReceived(sender, param) {
         let msg = param['Message'];
         if (this.checkIfMessageApplies(msg)) {
+            if (msg instanceof DefMessage) {
+                this.enable(msg);
+                this.onDefReceived(msg);
+            }
             if (msg instanceof SetMessage) {
                 this.updateStatus(msg);
                 this.onSetReceived(msg);
@@ -99,25 +109,33 @@ class AbstractControl extends TemplateControl {
 
     updateStatus(msg) {
         let newStatus = msg.state;
-        if (!this.Enabled) {
-            this.Enabled = true;
-            this.render();
-        }
         if (this.Status != newStatus) {
             this.Status = newStatus;
             this.$('Status').render();
         }
     }
 
+    enable(msg) {
+        if (!this.Enabled) {
+            this.defMessage = msg;
+            this.render();
+        }
+    }
+
     disable() {
         if (this.Enabled) {
-            this.Enabled = false;
+            this.defMessage = null;
+            this.Status = 'idle';
             this.render();
         }
     }
 
     checkIfMessageApplies(message:IndiMessage) {
         return true;
+    }
+
+    onDefReceived(message:DefMessage) {
+
     }
 
     onSetReceived(message:SetMessage) {
@@ -216,7 +234,7 @@ class ElementAbstractControl extends AbstractControl {
     checkIfMessageApplies(message:SetMessage) {
         return message.device == this.Device
             && message.name == this.Vector
-            && message.hasElement(this.Element)
+            && (message instanceof DelProperty || message.hasElement(this.Element))
     }
 }
 

@@ -4,6 +4,7 @@ import { IndiMessage } from "@app/indi/messages/IndiMessage";
 import { SetMessage } from "@app/indi/messages/Set";
 import { NewTextVector, NewNumberVector } from "@app/indi/messages/New";
 import { OneText, OneNumber } from "@app/indi/messages/One";
+import { DefMessage } from "@app/indi/messages/Def";
 
 export default class SingleValueView extends ElementAbstractControl {
     template = template;
@@ -46,17 +47,19 @@ export default class SingleValueView extends ElementAbstractControl {
     saveClicked(sender, param) {
         let newValue = this.$('Input').Text;
 
-        let msg = new NewNumberVector(
+        let newClass = (<typeof DefMessage>this.defMessage.constructor).newClass;
+
+        let msg = new newClass(
             this.Device,
             this.Vector,
             [
-                new OneNumber(this.Element, newValue)
+                new newClass.oneClass(this.Element, newValue)
             ]
         );
-        this.getConnection().messageSend(msg);
 
-        this.updateInput = true;
         this.$('Input').Text = '⌛';
+        this.updateInput = true;
+        this.getConnection().messageSend(msg);
         this.$('Controls').render();
     }
 }

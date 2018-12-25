@@ -44,6 +44,12 @@ export default class SingleValueView extends ElementAbstractControl {
         this.$('Controls').render();
     }
 
+    getControlsClass() {
+        return 'single_value_input__controls' + (this.updateInput
+            ? '--inactive'
+            : '--active');
+    }
+
     saveClicked(sender, param) {
         let newValue = this.$('Input').Text;
 

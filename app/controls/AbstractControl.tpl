@@ -1,4 +1,4 @@
-<div class="dashboard-item" style="[%= this.getGridStyle() %]">
+<div class="dashboard-item [%= this.getItemClass() %]" style="[%= this.getGridStyle() %]">
     <com:PlaceHolder ID="Status">
         <span class="dashboard-item__status-icon dashboard-item__status-icon--[%= this.getStatusClass() %]"></span>
     </com:PlaceHolder>

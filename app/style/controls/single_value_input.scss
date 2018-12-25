@@ -1,21 +1,18 @@
-.focuser_joystick {
+.single_value_input {
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    flex-direction: column;
-
-    &__current {
-
-    }
-
-    &__target {
-        &--inactive {
-            visibility: hidden;
-        }
+    flex-flow: column;
+    
+    &__controls {
+        flex-flow: row;
         &--active {
             visibility: visible;
+        }
+        &--inactive {
+            visibility: hidden;
         }
     }
 }

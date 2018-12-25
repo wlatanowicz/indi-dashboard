@@ -34,6 +34,12 @@ export default class FocuserJoystick extends ElementAbstractControl {
             : null;
     }
 
+    getTargetClass(): string {
+        return this.TargetValue !== null
+            ? 'focuser_joystick__target--active'
+            : 'focuser_joystick__target--inactive';
+    }
+
     onSetReceived(message:SetMessage) {
         this.DisplayValue = message.getElement(this.Element).value;
         if (this.TargetValue !== null && this.DisplayValue == this.TargetValue) {

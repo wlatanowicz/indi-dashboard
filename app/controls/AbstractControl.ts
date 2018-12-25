@@ -182,6 +182,14 @@ class AbstractControl extends TemplateControl {
         return style;
     }
 
+    getItemClass() {
+        let css = '';
+        css += 'dashboard-item' + (this.Enabled
+            ? '--enabled'
+            : '--disabled');
+        return css;
+    }
+
     getStatusClass() {
         let status = this.Status ? this.Status.toLowerCase() : null;
         switch (status) {

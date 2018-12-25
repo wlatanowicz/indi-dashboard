@@ -1,4 +1,4 @@
-<div class="value">
+<div class="single_value_view">
     <com:SwitchView>
         <com:Case Condition="[%= this.Enabled %]">
             [%= SourceTemplateControl.DisplayValue %]

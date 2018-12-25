@@ -11,11 +11,28 @@ body {
     grid-template-columns: repeat(10, 180px);
     grid-template-rows: repeat(10, 180px);
     grid-gap: 5px;
+
+    /* iPhone 6, 7, 8 ----------- */
+    @media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2){
+        grid-template-columns: 100vw;
+        grid-template-rows: 100vw;
+    }
+
+    /* iPhone 6, 7, 8 landscape ----------- */
+    @media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
+        grid-template-columns: repeat(2, 50vw);
+        grid-template-rows: repeat(2, 50vw);
+    }
 }
 
 .dashboard-item {
     border: 1px solid gray;
     color: gray;
+
+    &--disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
 
     &__status-icon {
         display: inline-block;
